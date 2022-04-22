@@ -1,7 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
+// const url = "https://static.platzi.com/ui/assets/image/logotipo-platzie69328f33899695e31fa.png"
+
+function App(props) {
   return (
     <div className="App">
       <header className="App-header">
@@ -17,6 +19,15 @@ function App() {
         >
           Learn React
         </a>
+        <p>
+          {props.saludo}
+        </p>
+        <p>
+          {props.children}
+        </p>
+        <p>
+          {props.despedida}
+        </p>
       </header>
     </div>
   );
