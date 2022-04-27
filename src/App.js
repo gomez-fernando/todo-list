@@ -24,8 +24,39 @@ function App() {
 
   if(!searchValue.length >= 1) {
     searchedTodos = todos;
+  } else{
+    searchedTodos = todos.filter(todo => {
+      const todoText = todo.text.toLowerCase();
+      const searchText = searchValue.toLocaleLowerCase();
+      return todoText.includes(searchText);
+    });
+
   }
 
+  // const completeTodos = (text) => {
+  //   const todoIndex = todos.findIndex(todo => todo.text === text);
+
+  //   const newTodos = [...todos];
+  //   newTodos[todoIndex].completed = true;
+    
+  //   setTodos(newTodos);
+  // };
+
+  const toggleCompleteTodo = (text) => {
+    const todoIndex = todos.findIndex(todo => todo.text === text);
+    const newTodos = [...todos];
+    newTodos[todoIndex].completed = !newTodos[todoIndex].completed;
+    setTodos(newTodos);
+  }
+
+  const deleteTodo = (text) => {
+    const todoIndex = todos.findIndex(todo => todo.text === text);
+
+    const newTodos = [...todos];
+    newTodos.splice(todoIndex, 1);
+    
+    setTodos(newTodos);
+  };
 
   return (
     <React.Fragment>
@@ -44,6 +75,8 @@ function App() {
             key={todo.text}
             text={todo.text}
             completed={todo.completed}
+            toggleCompleteTodo={() => toggleCompleteTodo(todo.text)} 
+            onDelete={() => deleteTodo(todo.text)}
           />
         ))}
       </TodoList>
